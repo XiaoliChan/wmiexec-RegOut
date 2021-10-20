@@ -17,10 +17,9 @@ Modify version of impacket wmiexec.py, get output(data,response) from registry, 
 ## Overview
 
 In original wmiexec.py, it get response from smb connection (port 445,139). Unfortunately, some antivirus software monitoring these ports as high risk.  
-In this case, I drop smb connection function and use win32Process.Create method to execute command.
+In this case, I drop smb connection function and use others method to execute command.
 
-wmiexec-reg-sch-UnderNT6-wip.py is using win32-scheduledjob class to execute command. According to [WMIHACKER](https://github.com/rootclay/WMIHACKER) author, win32-scheduledjob class only works under windows NT6 (windows-server 2003).
-
+- wmiexec-reg-sch-UnderNT6-wip.py: Executed command by using win32-scheduledjob class. According to xiangshan, win32-scheduledjob class only works under windows NT6 (windows-server 2003).  
 BTW, win32_scheduledjob has been disabled by default after windows NT6. Here is the way how to enable it.
 ```text
 Key: HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\Configuration 
@@ -29,7 +28,10 @@ Type: REG_DWORD
 Value: 1
 ```
 
-wmipersist-wip.py is a Python version of [WMIHACKER](https://github.com/rootclay/WMIHACKER), which I picked the vbs template from it. Attacker can use it to do lateral movement safety under antivirus-software running.
+- wmipersist-wip.py (Recommend): A Python version of [WMIHACKER](https://github.com/rootclay/WMIHACKER), which I picked the vbs template from it. Attacker can use it to do lateral movement safety under antivirus-software running.
+
+
+- wmiexec-regOut.py: Just a simple Win32_Process.create method example .
 
 ## How it works?
 
