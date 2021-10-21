@@ -1,6 +1,6 @@
 # wmiexec-RegOut
 
-Modify version of impacket wmiexec.py, get output(data,response) from registry, don't need SMB connection, but I'm in the bad code :(
+Modify version of impacket wmiexec.py,wmipersist.py. Got output(data,response) from registry, don't need SMB connection, but I'm in the bad code :(
 
 # Table of content
 
@@ -28,7 +28,7 @@ Type: REG_DWORD
 Value: 1
 ```
 
-- wmipersist-wip.py (Recommend): A Python version of [WMIHACKER](https://github.com/rootclay/WMIHACKER), which I picked the vbs template from it. Attacker can use it to do lateral movement safety under antivirus-software running.
+- wmipersist-wip.py (Recommend, !!!only works on linux platform!!!): A Python version of [WMIHACKER](https://github.com/rootclay/WMIHACKER), which I picked the vbs template from it. Attacker can use it to do lateral movement safety under antivirus-software running.
 
 
 - wmiexec-regOut.py: Just a simple Win32_Process.create method example .
