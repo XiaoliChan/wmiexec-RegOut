@@ -16,7 +16,7 @@ Modify version of impacket wmiexec.py,wmipersist.py. Got output(data,response) f
 
 ## Overview
 
-In original wmiexec.py, it get response from smb connection (port 445,139). Unfortunately, some antivirus software monitoring these ports as high risk.  
+In original wmiexec.py, it get response from smb connection (port 445,139). Unfortunately, some antivirus software are monitoring these ports as high risk.  
 In this case, I drop smb connection function and use others method to execute command.
 
 - wmiexec-reg-sch-UnderNT6-wip.py: Executed command by using win32-scheduledjob class. According to xiangshan, win32-scheduledjob class only works under windows NT6 (windows-server 2003).  
