@@ -7,6 +7,7 @@ Modify version of impacket wmiexec.py,wmipersist.py. Got output(data,response) f
 * [Overview](#overview)
 * [Requirements](#Requirements)
 * [Usage](#Usage)
+* [Cheatsheet](#Cheatsheet)
 * [Todo](#todo)
 * [References](#References)
 
@@ -104,6 +105,16 @@ Generally, you just need to install official impacket.
   Under Huorong antivirus-software (Using WMIHACKER VBS template!!!)
   ![2ef86c8d934dc45498478aa9aedd91c](https://user-images.githubusercontent.com/30458572/137949219-b849be89-321e-4d1b-abf9-951509544679.png)
 
+## Cheatsheet
+  
+  - Do not forget to clean up temp directory after run command with out put.  
+  Command: `del /q /f /s C:\windows\temp\*`  
+  ![image](https://user-images.githubusercontent.com/30458572/147390683-5556f7a0-17da-4308-8f16-e82783ab42b3.png)
+
+  - Command include double quotes.  
+  Make double quotes inside single quotes `wevtutil cl '"security"'`  
+  ![image](https://user-images.githubusercontent.com/30458572/147390799-a3725a15-3c1c-4d63-850d-04e372ce04f7.png)
+  
 ## Todo
 
 - Optimize code (In bad code now.)
