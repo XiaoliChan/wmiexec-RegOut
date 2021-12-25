@@ -28,7 +28,7 @@ Type: REG_DWORD
 Value: 1
 ```
 
-- wmipersist-wip.py (Recommend, !!!only works on linux platform!!!): A Python version of [WMIHACKER](https://github.com/rootclay/WMIHACKER), which I picked the vbs template from it. Attacker can use it to do lateral movement safety under antivirus-software running.
+- wmipersist-wip.py `(Highly recommend, !!!only works on impacket v0.9.24!!!)`: A Python version of [WMIHACKER](https://github.com/rootclay/WMIHACKER), which I picked the vbs template from it. Attacker can use it to do lateral movement safety under antivirus-software running.
 
 
 - wmiexec-regOut.py: Just a simple Win32_Process.create method example .
