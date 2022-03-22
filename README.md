@@ -118,6 +118,7 @@ Generally, you just need to install official impacket.
 ## Todo
 
 - Optimize code (In bad code now.)
+- Filetransfer.py (Comming soon)
 - Add more functions
 
 ## References
