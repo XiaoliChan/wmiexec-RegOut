@@ -14,8 +14,6 @@ HKEY_USERS = -2147483651
 HKEY_CURRENT_CONFIG = -2147483653
 '''
 
-from __future__ import division
-from __future__ import print_function
 import re
 import sys
 import os
@@ -35,8 +33,6 @@ from impacket.dcerpc.v5.dtypes import NULL
 from impacket.krb5.keytab import Keytab
 from impacket.dcerpc.v5 import transport, rrp, scmr, rpcrt
 from impacket.system_errors import ERROR_NO_MORE_ITEMS
-from impacket.structure import hexdump
-from six import PY2
 import uuid
 import base64
 
@@ -44,11 +40,12 @@ OUTPUT_FILENAME = '__' + str(time.time())
 CODEC = sys.stdout.encoding
 
 class WMIEXEC:
-    def __init__(self, command='', username='', password='', domain='', hashes=None, aesKey=None,
+    def __init__(self, command='', username='', password='', address='', domain='', hashes=None, aesKey=None,
                 doKerberos=False, kdcHost=None, shell_type=None):
         self.__command = command
         self.__username = username
         self.__password = password
+        self.__address = address
         self.__domain = domain
         self.__lmhash = ''
         self.__nthash = ''
@@ -60,9 +57,8 @@ class WMIEXEC:
         if hashes is not None:
             self.__lmhash, self.__nthash = hashes.split(':')
 
-    def run(self, addr):
-
-        dcom = DCOMConnection(addr, self.__username, self.__password, self.__domain, self.__lmhash, self.__nthash,
+    def run(self):
+        dcom = DCOMConnection(self.__address, self.__username, self.__password, self.__domain, self.__lmhash, self.__nthash,
                               self.__aesKey, oxidResolver=True, doKerberos=self.__doKerberos, kdcHost=self.__kdcHost)
         try:
             iInterface = dcom.CoCreateInstanceEx(wmi.CLSID_WbemLevel1Login, wmi.IID_IWbemLevel1Login)
@@ -129,8 +125,9 @@ class RemoteShell(cmd.Cmd):
             data = data + " > " + resultTXT
             command = self.__shell + self.encodeCommand(data)
             self.__win32Process.Create(command, self.__pwd, None)
-            print("[+] Wait a second for command executed finish")
-            time.sleep(5)
+            for i in range(5,0,-1):
+                print(f"[+] Waiting {i} for command completely executed.", end="\r", flush=True)
+                time.sleep(1)
             #Convert result to base64 strings
             print("[+] Save file to: " + resultTXT)
             print("[+] Encoded file to base64 format")
@@ -286,9 +283,9 @@ if __name__ == '__main__':
         if options.aesKey is not None:
             options.k = True
 
-        executer = WMIEXEC(' '.join(options.command), username, password, domain, options.hashes, options.aesKey
+        executer = WMIEXEC(' '.join(options.command) ,username, password, address, domain, options.hashes, options.aesKey
                            ,options.k, options.dc_ip, options.shell_type)
-        executer.run(address)
+        executer.run()
     except KeyboardInterrupt as e:
         logging.error(str(e))
     except Exception as e:
