@@ -151,41 +151,9 @@ class RemoteShell(cmd.Cmd):
             #Query result through WQL syntax
             self.queryWQL(keyName)
 
-
     def send_data(self, data):
         self.execute_remote(data, self.__shell_type)
         print("[+] Command done")
-
-    def printReply(self, iEnum):
-        printHeader = True
-        while True:
-            try:
-                pEnum = iEnum.Next(0xffffffff,1)[0]
-                record = pEnum.getProperties()
-                if printHeader is True:
-                    print('|', end=' ')
-                    for col in record:
-                        print('%s |' % col, end=' ')
-                    print()
-                    printHeader = False
-                print('|', end=' ') 
-                for key in record:
-                    if type(record[key]['value']) is list:
-                        for item in record[key]['value']:
-                            print(item, end=' ')
-                        print(' |', end=' ')
-                    else:
-                        print('%s |' % record[key]['value'], end=' ')
-                print() 
-            except Exception as e:
-                if logging.getLogger().level == logging.DEBUG:
-                    import traceback
-                    traceback.print_exc()
-                if str(e).find('S_FALSE') < 0:
-                    raise
-                else:
-                    break
-        iEnum.RemRelease() 
 
     def queryWQL(self, keyName):
         namespace = '//%s/root/default' % address
