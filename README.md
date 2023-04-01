@@ -117,9 +117,7 @@ Generally, you just need to install official impacket.
   
 ## Todo
 
-- Optimize code (In bad code now.)
-- Filetransfer.py (Comming soon)
-- Add more functions
+- New version of wmi toolkit, Comming sonn :)
 
 ## References
 - https://github.com/SecureAuthCorp/impacket/blob/master/examples/wmiexec.py
