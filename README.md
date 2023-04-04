@@ -1,4 +1,4 @@
-:no_entry: [DEPRECATED] Active at https://github.com/XiaoliChan/wmiexec-Pro
+## :no_entry: [DEPRECATED] Active at https://github.com/XiaoliChan/wmiexec-Pro
 
 # wmiexec-RegOut
 
