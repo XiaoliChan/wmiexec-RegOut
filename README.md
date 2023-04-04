@@ -1,3 +1,5 @@
+:no_entry: [DEPRECATED] Active at https://github.com/XiaoliChan/wmiexec-Pro
+
 # wmiexec-RegOut
 
 Modify version of impacket wmiexec.py,wmipersist.py. Got output(data,response) from registry, don't need SMB connection, but I'm in the bad code :(
